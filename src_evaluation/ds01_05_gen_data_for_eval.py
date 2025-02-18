@@ -1,6 +1,6 @@
 
 """
-preparation for evaluation
+preparation for evaluation "Accuracy"
 
 """
 # %%
@@ -30,7 +30,7 @@ import Levenshtein
 
 
 # %%
-PROJPATH=r"/Users/noro/Documents/Projects/XBRL_common_space_projection/"
+PROJPATH=r"PROJECT_PATH"
 PROJDIR=Path(PROJPATH)
 
 # %%
@@ -51,8 +51,6 @@ openai_api_obj=openai_api()
 from libs.compose_prompt import *
 from libs.utils import *
 
-
-EVAL_MODEL="gpt_4"
 class batch_inf_file_generator():
     def __init__(self,prompt_dict,make_prompt_func,eval_model="gpt_4o_mini"):
         self.prompt_dict=prompt_dict
@@ -101,7 +99,7 @@ class batch_inf_file_generator():
 # %%
 
 def get_example_prompt(prompt_dict):
-    filename=PROJDIR / "data/3_processed/dataset_2310/downstream" / "2_intermediate/llm_proc" /"audit_res_markdown_eval.csv"
+    filename=PROJDIR  /"audit_res_markdown_eval.csv"
     dict_df=pd.read_csv(filename)
 
     ans_text=dict_df.loc[1,'audit_res']
@@ -116,7 +114,7 @@ def get_example_prompt(prompt_dict):
     return prompt_qag
 
 # %% step 1
-filename=PROJDIR / "data/3_processed/dataset_2310/downstream" / "2_intermediate/llm_proc" /"audit_res_markdown_eval.csv"
+filename=PROJDIR  /"audit_res_markdown_eval.csv"
 dict_df=pd.read_csv(filename,index_col=None,dtype=str).set_index('index_num')
 # %%
 prompt_qag_1 = {
@@ -138,7 +136,7 @@ for index_num in dict_df.index:
     #sys_prompt, usr_prompt = make_prompt_qag(prompt_qag,ans_text)
     batch_inf_file_generator_obj.insert_inf_list(ans_text,index_num)
 
-out_filename=PROJDIR / "data/3_processed/dataset_2310/downstream" / "eval_prep" /"eval_extracted_process_from_ans_gpt4.jsonl"
+out_filename=PROJDIR /"eval_extracted_process_from_ans_gpt4om.jsonl"
 batch_inf_file_generator_obj.export_list(out_filename)
 batch_inf_file_generator_obj.print_sample()
 # %%
@@ -168,7 +166,7 @@ def get_results(filename_openai_rst):
     return ans_list
 # %% step 2
 # for each audit procedure
-filename_openai_rst=PROJDIR / "data/3_processed/dataset_2310/downstream" / "eval_prep" /"eval_extracted_process_from_ans_gpt4_output.jsonl"
+filename_openai_rst=PROJDIR /"eval_extracted_process_from_ans_gpt4om_output.jsonl"
 response_list=get_results(filename_openai_rst=filename_openai_rst)
 
 # %%
@@ -191,19 +189,6 @@ prompt_qag_2 = {
     #### 文章
     # ${}
     }
-#prompt_qag_2 = {
-#    "qag_instruction": """提供された文章の匿名性を高めるため、専門用語を1つ選択し、<MASK>に置換した文章を2通り提供してください。""",
-#    #### 注意事項
-#    "qag_constraints": [
-#        "置換する専門用語は1つの単語に限らず、一体で意味を成すひとつながり用語も選択できます。",
-#        "置換する専門用語はできる限り特定可能性の高い固有の用語を選択してください。",
-#        "置換する専門用語は文章の中でポイントになる用語を選択してください。",
-#        "置換する専門用語は文章中の理由に関する記載範囲以外から選択してください。"
-#        ],
-#    "qag_output_formats": """#### 回答形式\n\nフォーマットは個別のjson形式で回答してください。\n\n{"置換後の文章":"(置換後の文章1)","置換した用語":"(置換した用語1)"}\n{"置換後の文章":"(置換後の文章2)","置換した用語":"(置換した用語2)"}""",
-#    #### 文章
-#    # ${}
-#    }
 
 batch_inf_file_generator_obj=batch_inf_file_generator(
             prompt_dict=prompt_qag_2,
@@ -216,7 +201,7 @@ for itr,response in enumerate(response_list):
         batch_inf_file_generator_obj.insert_inf_list(out_proc['監査手続'],index_str)
         index_num=index_num+1
 
-out_filename=PROJDIR / "data/3_processed/dataset_2310/downstream" / "eval_prep" /"eval_mask_qa_from_process_gpt4.jsonl"
+out_filename=PROJDIR /"eval_mask_qa_from_process_gpt4om.jsonl"
 batch_inf_file_generator_obj.export_list(out_filename)
 batch_inf_file_generator_obj.print_sample()
 
@@ -242,44 +227,12 @@ batch_inf_file_generator_obj=batch_inf_file_generator(
 
 for index_num in dict_df.index:
     ans_text=dict_df.loc[index_num,'output']
-    #sys_prompt, usr_prompt = make_prompt_qag(prompt_qag,ans_text)
     batch_inf_file_generator_obj.insert_inf_list(ans_text,index_num)
 
 out_filename=PROJDIR / "data/3_processed/dataset_2310/downstream" / "eval_prep" /"eval_keywords_from_ans_gpt4.jsonl"
 batch_inf_file_generator_obj.export_list(out_filename)
 batch_inf_file_generator_obj.print_sample()
 # %% Example
-
-## 1 preprocess by mini
-"""
-### system
-提供された文章から、監査上の具体的な対応事項を抽出してください。
-
-#### 注意事項
- * 抽出した文章は単独で意味が通るように、主語や代名詞を補ってください。
-
-フォーマットは個別のjson形式で回答してください。
-{"監査手続":"(監査手続1)"}
-{"監査手続":"(監査手続2)"}
-
-#### 回答形式
-
-### user
-
-#### 文章
-
-監査人は、売上高の期間帰属が適切であるか否かを検証するため、主に以下の監査手続を実施する。
-(1)内部統制の評価
-売上高の認識プロセスに関連する内部統制の整備・運用状況の有効性を評価する。評価にあたっては、特に以下に焦点を当てる。
-・売上計上日付と顧客から受領した検収書の日付を照合する統制
-(2)適切な期間に売上計上されているかの検討
-売上高が適切な会計期間に認識されているか否かを検討するため、以下を含む監査手続を実施する。
-1一定の条件を満たす期末月(3月)の売上取引を抽出し、下記の手続きを実施する。
-・顧客から受領した検収書に記載の日付と売上計上日付とを照合する。
-・当該取引にかかる債権について、期末時点における実在性を確認するため、顧客からの入金証憑との突合、もしくは顧客への直接確認を実施する。
-2期末日翌月(4月)の売上高のマイナス処理について、当事業年度の売上高の修正として処理すべき取引ではないことを確認する。
-
-"""
 
 
 ## 2 最新
@@ -304,54 +257,5 @@ batch_inf_file_generator_obj.print_sample()
 売上高が適切な会計期間に認識されているかを確認するため、期末月(3月)の売上取引を抽出し、顧客から受領した検収書に記載の日付と売上計上日付を照合する。
 期末時点における売上取引の実在性を確認するため、当該取引にかかる債権について、顧客からの入金証憑との突合、もしくは顧客への直接確認を実施する。
 期末日翌月(4月)の売上高のマイナス処理が当事業年度の売上高の修正として処理すべき取引ではないことを確認する。
-"""
-
-
-# %%
-
-
-## depreciated
-prompt_qag_old = {
-    "qag_instruction": """あなたは問題作成者です。\n次の文章から、監査上の具体的な対応事項を抽出し、ひとつながりの専門用語を<MASK>に置換した文を10個作ってください。""",
-    #### 注意事項
-    "qag_constraints": ["抽出した文章は単独で意味が通るように、主語や代名詞を補ってください。","置換するひとつながりの専門用語はできる限り固有の用語を選択してください。"],
-    "qag_output_formats": """フォーマットは個別のjson形式で回答してください。\n\n#### 回答形式\n{"置換後の文章":"(置換後の文章1)","置換した用語":"(置換した単語1)"}\n{"置換後の文章":"(置換後の文章2)","置換した単語":"(置換した用語2)"}""",
-    #### 文章
-    # ${}
-    }
-
-"""
-あなたは問題作成者です。
-提供された文章の匿名性を高めるため、専門用語を10個選択し、<MASK_(n)>に置換してください。nには1から10の数字が入ります。
-
-#### 注意事項
- * 文章のうち監査手続に関して記載された範囲のみを<MASK_(n)>への置換対象としてください。
- * 置換するひとつながりの専門用語はできる限り特定可能性の高い固有の用語を選択してください。
-
-#### 回答形式
-置換後の文章は```で囲って提供し、置換した用語を個別のJSON形式で提供してください。
-
-置換後の文章:
-```
-置換後の文章
-```
-
-置換した用語:
-{"MASK":"MASK_(1)","置換した単語":"(置換した用語1)"}
-{"MASK":"MASK_(2)","置換した単語":"(置換した用語2)"}
-
-### user
-
-#### 文章
-監査人は、売上高の期間帰属が適切であるか否かを検証するため、主に以下の監査手続を実施する。
-(1)内部統制の評価
-売上高の認識プロセスに関連する内部統制の整備・運用状況の有効性を評価する。評価にあたっては、特に以下に焦点を当てる。
-・売上計上日付と顧客から受領した検収書の日付を照合する統制
-(2)適切な期間に売上計上されているかの検討
-売上高が適切な会計期間に認識されているか否かを検討するため、以下を含む監査手続を実施する。
-1一定の条件を満たす期末月(3月)の売上取引を抽出し、下記の手続きを実施する。
-・顧客から受領した検収書に記載の日付と売上計上日付とを照合する。
-・当該取引にかかる債権について、期末時点における実在性を確認するため、顧客からの入金証憑との突合、もしくは顧客への直接確認を実施する。
-2期末日翌月(4月)の売上高のマイナス処理について、当事業年度の売上高の修正として処理すべき取引ではないことを確認する。
 """
 

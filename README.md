@@ -98,6 +98,9 @@ python inference.py --cfg_path_str ./cfg/xxxx.yaml --output_filename xxxx --file
 
 ## src_evaluation
 The script to evaluate the performance of LLM is described.
+- `src_evaluation/ds01_05_eval.py`: Evaluate the generation
+- `src_evaluation/ds01_05_gen_data_for_eval.py`: Prepare QA dataset (masking dataset) for accuracy evaluation
+
 
 ## prompt
 - `prompt/eval_prompt.json`: the prompt used for evaluation is described.
