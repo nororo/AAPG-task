@@ -17,17 +17,25 @@ summary of data is described in `dataset/data_train_markdown_1012.json`
 
 ### evaluation data
 - `dataset/data_validation_1012.csv`: evaluation data
-summary of data is described in `dataset/data_validation_1012.json`
-- `dataset/audit_res_markdown_eval.csv`: evaluation data converted to markdown style by Llama-3.1-8B
-- `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
+The evaluation dataset below is few-shot added version of this dataset.
 
-### evaluation data for experiment 2 (ablation study of few-shot setting)
+summary of data is described in `dataset/data_validation_1012.json`
+#### evaluation data experiment 1
+For Plain, SFT-IT, SFT-CV
+- `dataset/audit_res_markdown_eval.csv`: evaluation data converted to markdown style by Llama-3.1-8B
+For ICL(4-nearest)-qwen2
+- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 4 shot
+For ICL(1-nearest-1-various)-Llama3.1 and Swallow
+- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 1 shot and 1 various
+
+
+#### evaluation data for experiment 2 (ablation study of few-shot setting)
 ##### for Qwen2 following few-shot evaluation data is used.
 - `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
 - `dataset/few_shot/gen_audres_2-nearest.jsonl`: evaluation data with nearest 2 shot
-- `dataset/few_shot/gen_audres_3-nearest.jsonl`: evaluation data with nearest 2 shot
-- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 2 shot
-- `dataset/few_shot/gen_audres_5-nearest.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_3-nearest.jsonl`: evaluation data with nearest 3 shot
+- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 4 shot
+- `dataset/few_shot/gen_audres_5-nearest.jsonl`: evaluation data with nearest 5 shot
 
 - `dataset/few_shot/gen_audres_1-nearest-3-various.jsonl`: evaluation data with nearest 2 shot
 - `dataset/few_shot/gen_audres_4-random.jsonl`: evaluation data with nearest 2 shot
@@ -35,11 +43,18 @@ summary of data is described in `dataset/data_validation_1012.json`
 ##### for Llama 3.1 and Swallow following few-shot evaluation data is used.
 - `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
 - `dataset/few_shot/gen_audres_2-nearest.jsonl`: evaluation data with nearest 2 shot
-- `dataset/few_shot/gen_audres_3-nearest.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_3-nearest.jsonl`: evaluation data with nearest 3 shot
 
 - `dataset/few_shot/gen_audres_1-nearest-1-various.jsonl`: evaluation data with nearest 2 shot
 - `dataset/few_shot/gen_audres_2-random.jsonl`: evaluation data with nearest 2 shot
 
+#### evaluation data experiment 3
+For ICL baseline, SFT-IT (1-nearest), SFT-CV (1-nearest) and SFT-FS
+- `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
+For ICL(4-nearest)-qwen2 (best ICL)
+- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 4 shot
+For ICL(1-nearest-1-various)-Llama3.1 and Swallow (best ICL)
+- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 1 shot and 1 various
 
 
 # source code
