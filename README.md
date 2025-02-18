@@ -15,12 +15,32 @@ https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/LICENSE
 
 summary of data is described in `dataset/data_train_markdown_1012.json`
 
-### test data
-- `dataset/data_validation_1012.csv`: test data
-- `dataset/audit_res_markdown_eval.csv`: test data converted to markdown style by Llama-3.1-8B
-- `dataset/gen_audres_1shot.jsonl`: test data with nearest 1 shot
-
+### evaluation data
+- `dataset/data_validation_1012.csv`: evaluation data
 summary of data is described in `dataset/data_validation_1012.json`
+- `dataset/audit_res_markdown_eval.csv`: evaluation data converted to markdown style by Llama-3.1-8B
+- `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
+
+### evaluation data for experiment 2 (ablation study of few-shot setting)
+##### for Qwen2 following few-shot evaluation data is used.
+- `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
+- `dataset/few_shot/gen_audres_2-nearest.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_3-nearest.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_5-nearest.jsonl`: evaluation data with nearest 2 shot
+
+- `dataset/few_shot/gen_audres_1-nearest-3-various.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_4-random.jsonl`: evaluation data with nearest 2 shot
+
+##### for Llama 3.1 and Swallow following few-shot evaluation data is used.
+- `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
+- `dataset/few_shot/gen_audres_2-nearest.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_3-nearest.jsonl`: evaluation data with nearest 2 shot
+
+- `dataset/few_shot/gen_audres_1-nearest-1-various.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_2-random.jsonl`: evaluation data with nearest 2 shot
+
+
 
 # source code
 ## src_data_download
@@ -53,3 +73,8 @@ The script to evaluate the performance of LLM is described.
 ## prompt
 - `prompt/eval_prompt.json`: the prompt used for evaluation is described.
 - `prompt/eval_prompt_eng.json`: English translated version of the prompt above.
+
+## results
+All evaluation results are described in this directory.
+- `results/eval_result_df.csv`: evaluation results for each evaluation instance
+- `results/eval_result_summary.csv`: summary of evaluation results (averaged scores)
