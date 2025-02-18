@@ -9,7 +9,6 @@ https://disclosure2.edinet-fsa.go.jp/week0010.aspx#
 In addition to term of use above ,sinse the column "output" is output of Llama-3.1-8B model, in which audit response -column "audit_res"- is converted to markdown style by Llama-3.1-8B, term of use of Meta Llama model is applied.
 https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/LICENSE
 
-
 ### training data
 - `dataset/data_train_markdown_1012.csv`: training data for fine-tuning
 
@@ -56,14 +55,27 @@ For ICL(4-nearest)-qwen2 (best ICL)
 For ICL(1-nearest-1-various)-Llama3.1 and Swallow (best ICL)
 - `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 1 shot and 1 various
 
+### metadata
+- `dataset/response_tbl_with_year.pkl`: all metadata of downloaded documents from EDINET API
+This file is only used for getting list of document-id (docid), and can be read as following:
+```python
+import pandas asa pd
+response_tbl = pd.read_pickle("./dataset/response_tbl_with_year.pkl")
+```
+
 
 # source code
 ## src_data_download
 The script to download data from EDINET is described.
-sample data acquition is described in `src_data_download/sample_download_edinetapi.ipynb`
+Sample code for data acquition is described in `src_data_download/sample_download_edinetapi.ipynb`
 
 ## src_preprocessing
 The script to preprocess data is described.
+- `src_preprocessing/ds01_01_check_dataset.py`: Extract KAM data from downloaded XBRL data and normalize unicode of the text
+- `src_preprocessing/ds01_02_make_dataset_kam_generator.py`: Preprocess the extracted KAM data
+- `src_preprocessing/ds01_03_make_dataset_audit_response.py`: Preprocess the extracted KAM data and generate audit response by Llama-3.1-8B
+
+The preprocessed dataset are in `dataset/`
 
 ## src_finetuning
 The script to fine-tune LLM is described.
