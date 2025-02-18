@@ -25,6 +25,7 @@ summary of data is described in `dataset/data_validation_1012.json`
 # source code
 ## src_data_download
 The script to download data from EDINET is described.
+sample data acquition is described in `src_data_download/sample_download_edinetapi.ipynb`
 
 ## src_preprocessing
 The script to preprocess data is described.
@@ -48,3 +49,7 @@ python inference.py --cfg_path_str ./cfg/xxxx.yaml --output_filename xxxx --file
 
 ## src_evaluation
 The script to evaluate the performance of LLM is described.
+
+## prompt
+- `prompt/eval_prompt.json`: the prompt used for evaluation is described.
+- `prompt/eval_prompt_eng.json`: English translated version of the prompt above.
