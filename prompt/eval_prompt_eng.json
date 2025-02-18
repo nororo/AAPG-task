@@ -1,0 +1,53 @@
+{
+    "qag_instruction": "From the provided text, please identify the term that should fill in the <MASK> in the following question. If it cannot be determined from the provided text, answer 'unknown'.",
+    "qag_constraints": [
+      "If the answer cannot be directly derived from the provided text, respond with {\"answer\": \"unknown\"}.",
+      "If an answer is found, respond in the format {\"answer\": \"relevant term\"}.",
+      "Consider the context of the provided text sufficiently.",
+      "Avoid speculative answers."
+    ],
+    "qag_output_format": "Please answer in JSON format.\n#### Response format\n{\"answer\":\"(answer)\"}",
+    "e_comp2_instruction": "Please evaluate the comprehensiveness of the provided response according to the following instructions and assign a score.\n\n#### Evaluation criteria\nComprehensiveness is measured by how much of the information in the correct answer is included in the predicted response. The more elements from the correct answer that are included or similar in the predicted response, the higher the score.",
+    "e_comp2_scale": {
+      "5": "All items mentioned in the correct answer have similar content included in the predicted response.",
+      "4": "Most items mentioned in the correct answer have similar content included in the predicted response.",
+      "3": "About half of the items mentioned in the correct answer have similar content included in the predicted response.",
+      "2": "Only a few items mentioned in the correct answer have similar content included in the predicted response.",
+      "1": "None of the items mentioned in the correct answer have similar content included in the predicted response."
+    },
+    "e_comp2_constraints": [
+      "Evaluate only from the perspective of comprehensiveness. For example, do not consider the appropriateness of the audit procedures themselves or the specificity of the description.",
+      "If the predicted response includes content that abstracts items mentioned in the correct answer, consider that content as included.",
+      "First provide step-by-step logical reasoning, then answer in the specified format."
+    ],
+    "e_comp2_output_formats": "#### Response format\n\n##### Reasoning\nStep-by-step logical reasoning\n\n##### Conclusion\n{\"score\":\"(integer from 1 to 5)\"}",
+    "e_comp2_example_text": "### Evaluation Example\n\n#### Correct Answer\nCharacteristics of apples:\n1. Red or green skin\n2. Sweet taste\n3. Rich in dietary fiber\n4. Contains vitamin C\n\n#### Predicted Response\nApples have red skin, are sweet and delicious. They are also considered good for health.\n\n#### Evaluation Result\n##### Reasoning\nColor and taste are mentioned, but nutritional aspects (dietary fiber, vitamin C) are not mentioned. There is a general reference to being healthy, but it lacks specificity.\n##### Conclusion\n{\"score\": 3}\n\n\nBased on the above instructions, please evaluate the predicted response using the provided correct answer and assign an appropriate score.",
+    "e_conc_instruction": "You are an evaluator of responses in accounting audits. Specificity is measured by how well individual situations in the consideration items are reflected in the audit procedures of the predicted response. Please evaluate based on the following criteria.\n\n#### Evaluation criteria\nReflection of consideration items: The higher the score, the more the predicted response covers the characteristics and concerns presented in the consideration items, and the more specific and feasible the proposed audit procedures are.",
+    "e_conc_scale": {
+      "5": "Reflects all individual situations shown in the consideration items, the description of audit procedures is specific, and there are no ambiguous points.",
+      "4": "Reflects about 90% of individual situations shown in the consideration items with specific audit procedures, but there is one ambiguous point.",
+      "3": "Reflects most individual situations shown in the consideration items with specific audit procedures, but there are two or more ambiguous points.",
+      "2": "Partially reflects the individual situations shown in the consideration items, but there are ambiguous points in the description of audit procedures.",
+      "1": "Only partially reflects the individual situations shown in the consideration items in the predicted audit procedures, and the description of audit procedures is not specific."
+    },
+    "e_conc_constraints": [
+      "Evaluate only from the perspective of specificity of description. Do not consider the comprehensiveness of the described audit procedures or their relevance to the risks mentioned in the consideration items.",
+      "First, extract the individual situations shown in the consideration items, then examine step by step whether they are specifically reflected in the description of audit procedures. Finally, answer in the specified format."
+    ],
+    "e_conc_output_formats": "#### Response format\n\n##### Reasoning\nStep-by-step logical reasoning\n\n##### Conclusion\n{\"score\":\"(integer from 1 to 5)\"}",
+    "e_conc_example_text": "### Evaluation Example\n#### Consideration Items\nRevenue is recognized based on acceptance criteria, but there is a risk that the period attribution of sales at the end of the month is inappropriate.\n\n#### Predicted Audit Procedures\nVerify that the sales recording date at the end of the month matches the date of the supporting documentation received from the customer.\n\n#### Evaluation Result\n##### Reasoning\nThe mention of the end of the month partially reflects the individual situation, but the supporting documentation mentioned is not specific, and there is room for improvement, such as specifying acceptance documents, etc.\n##### Conclusion\n{\"score\": 2}\n\nBased on the above instructions, please evaluate the provided correct answer and predicted response and assign an appropriate score.",
+    "e_rel_instruction": "You are an evaluator of responses in accounting audits. Scoring for relevance is based on whether the predicted audit procedures address the issues described in the consideration items. It does not consider whether the issues described in the consideration items are comprehensively addressed.",
+    "e_rel_scale": {
+      "5": "All of the predicted audit procedures directly address the issues described in the consideration items, with no room for improvement in relevance.",
+      "4": "About 90% of the predicted audit procedures address the issues described in the consideration items, but one item with low relevance is included.",
+      "3": "Most of the predicted audit procedures address the issues described in the consideration items, but two or more items with low relevance are included.",
+      "2": "Some of the predicted audit procedures address the issues described in the consideration items, but many items with low relevance are also included.",
+      "1": "None of the predicted audit procedures have high relevance to the issues described in the consideration items."
+    },
+    "e_rel_constraints": [
+      "Evaluate only from the perspective of relevance. Do not consider the comprehensiveness of the described audit procedures or the specificity of the description.",
+      "Consider the relevance of each predicted audit procedure to the consideration items step by step, then answer in the specified format."
+    ],
+    "e_rel_output_formats": "#### Response format\n\n##### Reasoning\nStep-by-step logical reasoning\n\n##### Conclusion\n{\"score\":\"(integer from 1 to 5)\"}",
+    "e_rel_example_text": "### Evaluation Example\n#### Consideration Items\nRevenue is recognized based on acceptance criteria, but there is a risk that the period attribution of sales at the end of the month is inappropriate.\n\n#### Predicted Audit Procedures\nFor sales transactions recorded at the end of the month, verify that the recording date matches the date on the acceptance document received from the customer.\nFor sales transactions recorded at the end of the month, verify that the recorded amount matches the amount on the acceptance document received from the customer.\n\n#### Evaluation Result\n##### Reasoning\nVerifying the recording date against the acceptance document date addresses the issue described in the consideration items, but verifying the amount does not address the described issue.\n##### Conclusion\n{\"score\": 3}\n"
+  }
