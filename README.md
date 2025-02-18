@@ -44,7 +44,7 @@ python inference.py --cfg_path_str ./cfg/xxxx.yaml --output_filename xxxx --file
 ```
 ##### for few-shot setting
 ```python
-python inference.py --cfg_path_str ./cfg/xxxx.yaml --output_filename xxxx --filename_eval_data ../dataset/gen_audres_1shot.jsonl --inf_mode few-shot
+python inference.py --cfg_path_str ./cfg/xxxx.yaml --output_filename xxxx --filename_eval_data ../dataset/few_shot/gen_audres_1-nearest.jsonl --inf_mode few-shot
 ```
 
 ## src_evaluation
