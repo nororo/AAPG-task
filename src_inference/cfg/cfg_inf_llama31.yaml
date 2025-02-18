@@ -1,0 +1,11 @@
+cfg_model:
+    pre_model_name: Llama31
+    pre_sft_bool: True
+    adapter_checkpoint_path: "results/checkpoint-15032"
+inference:
+    inf_mode: "zero-shot"
+    max_new_tokens: 1024
+    do_sample: True
+    temperature: 0.6
+    top_p: 0.9
+              
