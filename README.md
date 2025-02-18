@@ -53,7 +53,7 @@ For ICL baseline, SFT-IT (1-nearest), SFT-CV (1-nearest) and SFT-FS
 For ICL(4-nearest)-qwen2 (best ICL)
 - `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 4 shot
 For ICL(1-nearest-1-various)-Llama3.1 and Swallow (best ICL)
-- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 1 shot and 1 various
+- `dataset/few_shot/gen_audres_1-nearest-1-various.jsonl`: evaluation data with nearest 1 shot and 1 various
 
 ### metadata
 - `dataset/response_tbl_with_year.pkl`: all metadata of downloaded documents from EDINET API
@@ -73,7 +73,9 @@ Sample code for data acquition is described in `src_data_download/sample_downloa
 The script to preprocess data is described.
 - `src_preprocessing/ds01_01_check_dataset.py`: Extract KAM data from downloaded XBRL data and normalize unicode of the text
 - `src_preprocessing/ds01_02_make_dataset_kam_generator.py`: Preprocess the extracted KAM data
-- `src_preprocessing/ds01_03_make_dataset_audit_response.py`: Preprocess the extracted KAM data and generate audit response by Llama-3.1-8B
+- `src_preprocessing/ds01_03_dataset_aplit.py`: Define train and validation dataset for fine-tuning
+- `src_preprocessing/ds01_04_emb_kam.py`: Get vector expression of KAM description text by multilingual-e5 embedding.
+- `src_preprocessing/ds01_05_clustering_kam.py`: Clustering KAM description text by UMAP and DBSCAN into KAM topics, which is used for training detail domain adaptation model (Detail-SFT-IT and Detail-SFT-CV).
 
 The preprocessed dataset are in `dataset/`
 

@@ -1,13 +1,15 @@
+"""
+Get vector expression of KAM text in embedding space for few-shot prompting.
+
+"""
+
 # %%
-import csv
 from transformers import AutoTokenizer, AutoModel
 import torch
 from torch import Tensor
 import torch.nn.functional as F
 from tqdm import tqdm
 
-
-# %%
 
 import csv
 import numpy as np
@@ -21,10 +23,9 @@ from pathlib import Path
 import pandas as pd
 
 # %%
-PROJPATH=r"/Users/noro/Documents/Projects/XBRL_common_space_projection/"
-PROJDIR=Path(PROJPATH)
-
-filename=PROJDIR / "data/3_processed/dataset_2310/downstream" / "1_raw" /"dict_all_df_2407_v1012.csv"
+PROJPATH = r"PROJECT_PATH"
+PROJDIR = Path(PROJPATH)
+filename = PROJDIR /"dict_all_df_2407_v1012.csv"
 
 dict_all_df=pd.read_csv(filename)
 dict_all_df.shape
@@ -42,7 +43,6 @@ dict_all_df_concat=dict_all_df.groupby(['id_tag']).apply(agg_text)
 # %%
 dict_all_df_concat.name='text'
 dict_all_df_concat=dict_all_df_concat.reset_index()
-#'parse_accounting_standards'
 dict_all_df=pd.merge(dict_all_df_concat,dict_all_df[['id_tag','tag','id','docID','context_ref','periodEnd','edinetCode']].drop_duplicates(keep='first'),left_on='id_tag',right_on='id_tag',how='left')
 
 def df_add_S100NSFT(data_all_add):
@@ -72,24 +72,18 @@ data_all_add = dict_all_df.query("docID in ['S100NSFT','S100O831']").set_index('
 dict_all_df=pd.concat([dict_all_df.query("docID not in ['S100NSFT','S100O831']"),df_add_S100NSFT(data_all_add),df_add_S100O831(data_all_add)]).reset_index(drop=True)
 dict_all_df.periodEnd=pd.to_datetime(dict_all_df.periodEnd)
 dict_all_df=dict_all_df.query("periodEnd<='2024/3/31'")
-dict_all_df.periodEnd=dict_all_df.periodEnd
-# %%
+
 dict_all_df.periodEnd=dict_all_df.periodEnd.astype(str)
 
-# %%
 data_all_pivot = dict_all_df.pivot_table(index='id',columns='tag',values='text',aggfunc='first')
-#data_all_token_size = dict_all_df.pivot_table(index='id',columns='tag',values='token_size_llama3_8b',aggfunc='first')
-#data_all_token_size.columns = 'token_size_llama3_8b_' + data_all_token_size.columns
-#data_all_pivot = pd.merge(data_all_pivot,data_all_token_size,left_index=True,right_index=True,how='left').reset_index()
 id_edinetCode = dict_all_df.query("tag == 'description'")[['id','edinetCode','periodEnd','context_ref']]#'parse_accounting_standards'
 data_all_pivot = pd.merge(data_all_pivot,id_edinetCode,left_on='id',right_on='id',how='left')#.query("edinetCode.isnull()")
 data_all_pivot = data_all_pivot.assign(edinetCode_term=data_all_pivot.edinetCode+"_"+data_all_pivot.periodEnd)
 data_all_pivot.head(1)
 
-# %%
-data_all_pivot.to_csv(PROJDIR / "data/3_processed/dataset_2310/downstream/all_data_mapping" / "data_all17k_pivot_2407_v1012.csv",index=False)
+data_all_pivot.to_csv(PROJDIR / "data_all17k_pivot_2407_v1012.csv",index=False)
 
-# %%
+# embedding
 model_name = "intfloat/multilingual-e5-large"
 TOKENIZER = AutoTokenizer.from_pretrained(model_name)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -108,17 +102,14 @@ def emb(text):
     embeddings = average_pool(outputs.last_hidden_state, inputs['attention_mask'])
     embeddings = F.normalize(embeddings, p=2, dim=1)
     return embeddings[0].cpu().numpy()
-# %%
-data_all_pivot.description.isna().sum()
-# %%
-data_smp=data_all_pivot#query("docID not in ['S100NSFT','S100O831']")#.edinetCode_term.value_counts()
-#.isna().sum()
+# check nan
+print(data_all_pivot.description.isna().sum())
 # %%
 vectors=data_all_pivot.description.apply(emb)
 vectors_df=pd.DataFrame(vectors.to_list())
 data_all_pivot = dict_all_df.pivot_table(index='id',columns='tag',values='text',aggfunc='first')
 data_all_pivot.description.isna().sum()
-out_filename=PROJDIR / "data/3_processed/dataset_2310/downstream"/ "all_data_mapping" / "dict_all_df_2407_v1012_vect_df.pkl"
+out_filename=PROJDIR / "dict_all_df_2407_v1012_vect_df.pkl"
 vectors_df.to_pickle(out_filename)
 
 # %%
