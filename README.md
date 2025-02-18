@@ -28,12 +28,23 @@ The script to download data from EDINET is described.
 
 ## src_preprocessing
 The script to preprocess data is described.
+
 ## src_finetuning
 The script to fine-tune LLM is described.
 The config containing hyperparameters is described in `src_finetuning/cfg/xxxx.yaml`
-
+```python
+python fine_tuning.py --cfg_path_str ./cfg/xxxx.yaml --model_save_dir xxxx --filename_train_data ../dataset/data_train_markdown_1012.csv
+```
 ## src_inference
 The script to generate audit response is described.
+##### for zero-shot setting
+```python
+python inference.py --cfg_path_str ./cfg/xxxx.yaml --output_filename xxxx --filename_eval_data ../dataset/audit_res_markdown_eval.csv --inf_mode zero-shot
+```
+##### for few-shot setting
+```python
+python inference.py --cfg_path_str ./cfg/xxxx.yaml --output_filename xxxx --filename_eval_data ../dataset/gen_audres_1shot.jsonl --inf_mode few-shot
+```
 
 ## src_evaluation
 The script to evaluate the performance of LLM is described.
