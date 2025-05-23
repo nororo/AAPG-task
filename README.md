@@ -39,15 +39,14 @@ Copyright belongs to the auditor or submitter. And the translation is done by th
 
 
 ### training data
-- `dataset/data_train_markdown_1012.csv`: training data for fine-tuning
+- `dataset/data_train_markdown.csv`: training data for fine-tuning
 
-summary of data is described in `dataset/data_train_markdown_1012.json`
 
 ### evaluation data
-- `dataset/data_validation_1012.csv`: evaluation data
+- `dataset/data_validation.csv`: evaluation data
+
 The evaluation dataset below is few-shot added version of this dataset.
 
-summary of data is described in `dataset/data_validation_1012.json`
 #### evaluation data experiment 1
 For Plain, SFT-IT, SFT-CV
 - `dataset/audit_res_markdown_eval.csv`: evaluation data converted to markdown style by Llama-3.1-8B
