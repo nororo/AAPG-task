@@ -1,0 +1,15 @@
+# example of config file for inference with Llama31 model parameters for inference are common to all models
+cfg_model:
+    pre_model_name: Qwen
+    pre_instruct_bool: True
+    pre_qlora_bool: False
+    pre_sft_bool: False
+    pre_adapter_checkpoint_path:  ""
+cfg_inference:
+    input_file_type: "openai_batch"
+    max_new_tokens: 1024
+    do_sample: True
+    temperature: 0.6
+    top_p: 0.9
+dataset:
+    default_system_prompt: "Como especialista no campo da indústria de laticínios, por favor crie uma resposta quando uma pergunta for apresentada abaixo."

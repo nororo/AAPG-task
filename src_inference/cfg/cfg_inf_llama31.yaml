@@ -1,6 +1,8 @@
 # example of config file for inference with Llama31 model parameters for inference are common to all models
 cfg_model:
     pre_model_name: Llama31
+    pre_instruct_bool: True
+    pre_qlora_bool: False
     pre_sft_bool: True
     adapter_checkpoint_path: "results/checkpoint-15032"
 inference:
@@ -9,4 +11,6 @@ inference:
     do_sample: True
     temperature: 0.6
     top_p: 0.9
-              
+dataset:
+    name: "aapg"
+    default_system_prompt: "監査担当者であるあなたは、次の監査上の検討事項を与えられました。これに対する監査上の対応事項を日本語文章で具体的に立案してください。"
