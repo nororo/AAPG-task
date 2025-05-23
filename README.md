@@ -8,14 +8,18 @@ Repository for "Acquisition Difference in Fine-tuning vs. In-Context learning: M
 Term of use of original data from EDINET is also applied.
 https://disclosure2.edinet-fsa.go.jp/week0010.aspx#
 
-In addition to term of use above ,sinse the column "audit_res_md_converted" is output of Llama-3.1-8B model, in which audit response -column "audit_res"- is converted to markdown style by Llama-3.1-8B, term of use of Meta Llama model is applied.
+In addition to the term of use above ,since the column "audit_res_md_converted" is output of Llama-3.1-8B model, in which audit response -column "audit_res"- is converted to markdown style by Llama-3.1-8B, term of use of Meta Llama model is applied.
 https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/LICENSE
 
 ### description
 
+|                      | Train | Eval |
+| -------------------- | ----- | ---- |
+| Number of KAMs       | 8350  | 607  |
+| Number of Submitters | 3548  | 500  |
 
-
-
+Distribution of data length (word count in Japanese)
+![OneBigTable](results/length_distribution.png)
 
 **Example of training data (original in Japanese)**
 Copyright belongs to the auditor or submitter.
