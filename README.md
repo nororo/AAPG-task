@@ -5,10 +5,10 @@ Repository for "Multi-perspective Analysis of Large Language Model Domain Specia
 # Dataset
 
 ### Terms of use
-Term of use of original data from EDINET is also applied.
+Term of use of original data from EDINET is applied.
 https://disclosure2.edinet-fsa.go.jp/week0010.aspx#
 
-In addition to the term of use above ,since the column "audit_res_md_converted" is output of Llama-3.1-8B model, in which audit response -column "audit_res"- is converted to markdown style by Llama-3.1-8B, term of use of Meta Llama model is applied.
+In addition to the term of use above ,since the column "audit_res_md_converted" is output of Llama-3.1-8B model, in which audit response -column "audit_res"- is converted to markdown style by Llama-3.1-8B, term of use of Meta Llama model is also applied.
 https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/LICENSE
 
 ### Dataset Description
@@ -61,16 +61,20 @@ For ICL(1-nearest-1-various)-Llama3.1 and Swallow
 - `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
 - `dataset/few_shot/gen_audres_2-nearest.jsonl`: evaluation data with nearest 2 shot
 - `dataset/few_shot/gen_audres_3-nearest.jsonl`: evaluation data with nearest 3 shot
-- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 4 shot
 - `dataset/few_shot/gen_audres_5-nearest.jsonl`: evaluation data with nearest 5 shot
+- `dataset/few_shot/gen_audres_10-nearest.jsonl`: evaluation data with nearest 10 shot
+- `dataset/few_shot/gen_audres_20-nearest.jsonl`: evaluation data with nearest 20 shot
 
-- `dataset/few_shot/gen_audres_1-nearest-3-various.jsonl`: evaluation data with nearest 2 shot
-- `dataset/few_shot/gen_audres_4-random.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_1-nearest-19-various.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_20-random.jsonl`: evaluation data with nearest 2 shot
 
 ##### for Llama 3.1 and Swallow following few-shot evaluation data is used.
 - `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
 - `dataset/few_shot/gen_audres_2-nearest.jsonl`: evaluation data with nearest 2 shot
 - `dataset/few_shot/gen_audres_3-nearest.jsonl`: evaluation data with nearest 3 shot
+- `dataset/few_shot/gen_audres_5-nearest.jsonl`: evaluation data with nearest 5 shot
+- `dataset/few_shot/gen_audres_10-nearest.jsonl`: evaluation data with nearest 10 shot
+- `dataset/few_shot/gen_audres_20-nearest.jsonl`: evaluation data with nearest 20 shot
 
 - `dataset/few_shot/gen_audres_1-nearest-1-various.jsonl`: evaluation data with nearest 2 shot
 - `dataset/few_shot/gen_audres_2-random.jsonl`: evaluation data with nearest 2 shot
@@ -79,7 +83,7 @@ For ICL(1-nearest-1-various)-Llama3.1 and Swallow
 For ICL baseline, SFT-IT (1-nearest), SFT-CV (1-nearest) and SFT-FS
 - `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
 For ICL(4-nearest)-qwen2 (best ICL)
-- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 4 shot
+- `dataset/few_shot/gen_audres_20-nearest.jsonl`: evaluation data with nearest 4 shot
 For ICL(1-nearest-1-various)-Llama3.1 and Swallow (best ICL)
 - `dataset/few_shot/gen_audres_1-nearest-1-various.jsonl`: evaluation data with nearest 1 shot and 1 various
 
@@ -93,6 +97,7 @@ response_tbl = pd.read_pickle("./dataset/response_tbl_with_year.pkl")
 
 
 # source code
+
 ## src_data_download
 The script to download data from EDINET is described.
 Sample code for data acquition is described in `src_data_download/sample_download_edinetapi.ipynb`
