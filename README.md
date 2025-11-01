@@ -5,7 +5,7 @@ Repository for "Multi-perspective Analysis of Large Language Model Domain Specia
 # Dataset
 
 ### Terms of Use
-Terms of use of original data from EDINET is applied.
+Term of use of original data from EDINET is applied.
 https://disclosure2.edinet-fsa.go.jp/week0010.aspx#
 
 In addition to the term of use above ,since the column "audit_res_md_converted" is output of Llama-3.1-8B model, in which audit response -column "audit_res"- is converted to markdown style by Llama-3.1-8B, term of use of Meta Llama model is also applied.
