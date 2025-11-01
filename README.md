@@ -4,8 +4,8 @@ Repository for "Multi-perspective Analysis of Large Language Model Domain Specia
 
 # Dataset
 
-### Terms of use
-Term of use of original data from EDINET is applied.
+### Terms of Use
+Terms of use of original data from EDINET is applied.
 https://disclosure2.edinet-fsa.go.jp/week0010.aspx#
 
 In addition to the term of use above ,since the column "audit_res_md_converted" is output of Llama-3.1-8B model, in which audit response -column "audit_res"- is converted to markdown style by Llama-3.1-8B, term of use of Meta Llama model is also applied.
@@ -65,7 +65,7 @@ For ICL(1-nearest-1-various)-Llama3.1 and Swallow
 - `dataset/few_shot/gen_audres_10-nearest.jsonl`: evaluation data with nearest 10 shot
 - `dataset/few_shot/gen_audres_20-nearest.jsonl`: evaluation data with nearest 20 shot
 
-- `dataset/few_shot/gen_audres_1-nearest-19-various.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_1-nearest-19-diverse.jsonl`: evaluation data with nearest 2 shot
 - `dataset/few_shot/gen_audres_20-random.jsonl`: evaluation data with nearest 2 shot
 
 ##### for Llama 3.1 and Swallow following few-shot evaluation data is used.
@@ -76,7 +76,7 @@ For ICL(1-nearest-1-various)-Llama3.1 and Swallow
 - `dataset/few_shot/gen_audres_10-nearest.jsonl`: evaluation data with nearest 10 shot
 - `dataset/few_shot/gen_audres_20-nearest.jsonl`: evaluation data with nearest 20 shot
 
-- `dataset/few_shot/gen_audres_1-nearest-1-various.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_1-nearest-1-diverse.jsonl`: evaluation data with nearest 2 shot
 - `dataset/few_shot/gen_audres_2-random.jsonl`: evaluation data with nearest 2 shot
 
 #### evaluation data experiment 3
@@ -85,7 +85,7 @@ For ICL baseline, SFT-IT (1-nearest), SFT-CV (1-nearest) and SFT-FS
 For ICL(4-nearest)-qwen2 (best ICL)
 - `dataset/few_shot/gen_audres_20-nearest.jsonl`: evaluation data with nearest 4 shot
 For ICL(1-nearest-1-various)-Llama3.1 and Swallow (best ICL)
-- `dataset/few_shot/gen_audres_1-nearest-1-various.jsonl`: evaluation data with nearest 1 shot and 1 various
+- `dataset/few_shot/gen_audres_1-nearest-1-diverse.jsonl`: evaluation data with nearest 1 shot and 1 various
 
 ### metadata
 - `dataset/response_tbl_with_year.pkl`: all metadata of downloaded documents from EDINET API
