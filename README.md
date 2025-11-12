@@ -1,5 +1,5 @@
 # AAPG task
-Repository for "Multi-perspective Analysis of Large Language Model Domain Specialization: An Experiment in Accounting Audit Procedures Generation"
+Repository for [Multi-perspective Analysis of Large Language Model Domain Specialization: An Experiment in Accounting Audit Procedures Generation](https://aclanthology.org/2025.emnlp-main.891/)
 
 
 # Dataset
@@ -143,3 +143,21 @@ The script to evaluate the performance of LLM is described.
 All evaluation results are described in this directory.
 - `results/eval_result_df.csv`: evaluation results for each evaluation instance
 - `results/eval_result_summary.csv`: summary of evaluation results (averaged scores)
+
+# Citation
+If you find the work helpful, please feel free to cite us.
+```
+@inproceedings{noro-2025-multi,
+    title = "Multi-perspective Analysis of Large Language Model Domain Specialization: An Experiment in Accounting Audit Procedures Generation",
+    author = "Noro, Yusuke",
+    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.emnlp-main.891/",
+    doi = "10.18653/v1/2025.emnlp-main.891",
+    pages = "17671--17693",
+    ISBN = "979-8-89176-332-6"
+}
+```
