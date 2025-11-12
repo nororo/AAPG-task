@@ -145,7 +145,7 @@ All evaluation results are described in this directory.
 - `results/eval_result_summary.csv`: summary of evaluation results (averaged scores)
 
 # Citation
-If you find the work helpful, please feel free to cite us.
+If you find this work helpful, please feel free to cite it as follows:
 ```
 @inproceedings{noro-2025-multi,
     title = "Multi-perspective Analysis of Large Language Model Domain Specialization: An Experiment in Accounting Audit Procedures Generation",
