@@ -48,12 +48,12 @@ Copyright belongs to the auditor or submitter. And the translation is done by th
 The evaluation dataset below is few-shot added version of this dataset.
 
 #### evaluation data experiment 1
-For Plain, SFT-IT, SFT-CV
-- `dataset/audit_res_markdown_eval.csv`: evaluation data converted to markdown style by Llama-3.1-8B
-For ICL(4-nearest)-qwen2
-- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 4 shot
-For ICL(1-nearest-1-various)-Llama3.1 and Swallow
-- `dataset/few_shot/gen_audres_4-nearest.jsonl`: evaluation data with nearest 1 shot and 1 various
+For Plain, SFT-IT, SFT-CV  
+- `dataset/audit_res_markdown_eval.csv`: evaluation data converted to markdown style by Llama-3.1-8B  
+For ICL(20-nearest): Optimal selection for Qwen2  
+- `dataset/few_shot/gen_audres_20-nearest.jsonl`: evaluation data with nearest 20 shot  
+For ICL(1-nearest-1-diverse): Optimal selection for Llama3.1 and Swallow  
+- `dataset/few_shot/gen_audres_1-nearest-19-diverse.jsonl`: evaluation data with nearest 1 shot and 1 diverse  
 
 
 #### evaluation data for experiment 2 (ablation study of few-shot setting)
