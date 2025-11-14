@@ -65,8 +65,8 @@ For ICL(1-nearest-1-diverse): Optimal selection for Llama3.1 and Swallow
 - `dataset/few_shot/gen_audres_10-nearest.jsonl`: evaluation data with nearest 10 shot
 - `dataset/few_shot/gen_audres_20-nearest.jsonl`: evaluation data with nearest 20 shot
 
-- `dataset/few_shot/gen_audres_1-nearest-19-diverse.jsonl`: evaluation data with nearest 2 shot
-- `dataset/few_shot/gen_audres_20-random.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_1-nearest-19-diverse.jsonl`: evaluation data with nearest 1 shot and 19 diverse
+- `dataset/few_shot/gen_audres_20-random.jsonl`: evaluation data with random 20 shot
 
 ##### for Llama 3.1 and Swallow following few-shot evaluation data is used.
 - `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
@@ -76,16 +76,16 @@ For ICL(1-nearest-1-diverse): Optimal selection for Llama3.1 and Swallow
 - `dataset/few_shot/gen_audres_10-nearest.jsonl`: evaluation data with nearest 10 shot
 - `dataset/few_shot/gen_audres_20-nearest.jsonl`: evaluation data with nearest 20 shot
 
-- `dataset/few_shot/gen_audres_1-nearest-1-diverse.jsonl`: evaluation data with nearest 2 shot
-- `dataset/few_shot/gen_audres_2-random.jsonl`: evaluation data with nearest 2 shot
+- `dataset/few_shot/gen_audres_1-nearest-1-diverse.jsonl`: evaluation data with nearest 1 shot and 1 diverse
+- `dataset/few_shot/gen_audres_2-random.jsonl`: evaluation data with random 2 shot
 
 #### evaluation data experiment 3
-For ICL baseline, SFT-IT (1-nearest), SFT-CV (1-nearest) and SFT-FS
-- `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot
-For ICL(4-nearest)-qwen2 (best ICL)
-- `dataset/few_shot/gen_audres_20-nearest.jsonl`: evaluation data with nearest 4 shot
-For ICL(1-nearest-1-various)-Llama3.1 and Swallow (best ICL)
-- `dataset/few_shot/gen_audres_1-nearest-1-diverse.jsonl`: evaluation data with nearest 1 shot and 1 various
+For ICL baseline, SFT-IT (1-nearest), SFT-CV (1-nearest) and SFT-FS  
+- `dataset/few_shot/gen_audres_1-nearest.jsonl`: evaluation data with nearest 1 shot  
+For ICL(4-nearest)-qwen2 (best ICL)  
+- `dataset/few_shot/gen_audres_20-nearest.jsonl`: evaluation data with nearest 20 shot  
+For ICL(1-nearest-1-various)-Llama3.1 and Swallow (best ICL)  
+- `dataset/few_shot/gen_audres_1-nearest-1-diverse.jsonl`: evaluation data with nearest 1 shot and 1 diverse  
 
 ### metadata
 - `dataset/response_tbl_with_year.pkl`: all metadata of downloaded documents from EDINET API
@@ -108,7 +108,6 @@ The script to preprocess data is described.
 - `src_preprocessing/ds01_02_make_dataset_kam_generator.py`: Preprocess the extracted KAM data
 - `src_preprocessing/ds01_03_dataset_aplit.py`: Define train and validation dataset for fine-tuning
 - `src_preprocessing/ds01_04_emb_kam.py`: Get vector expression of KAM description text by multilingual-e5 embedding.
-- `src_preprocessing/ds01_05_clustering_kam.py`: Clustering KAM description text by UMAP and DBSCAN into KAM topics, which is used for training detail domain adaptation model (Detail-SFT-IT and Detail-SFT-CV).
 
 The preprocessed dataset are in `dataset/`
 
